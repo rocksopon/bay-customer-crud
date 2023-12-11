@@ -45,4 +45,13 @@ public class CustomerInformationService {
             throw new NotFoundException("CUSTOMER_ID_NOT_FOUND", "Customer ID " + id + " is not found");
         }
     }
+
+    public void deleteCustomerInformationById(long id) {
+        var customerData = customerInformationRepository.findById(id);
+        if (customerData.isPresent()) {
+            customerInformationRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("CUSTOMER_ID_NOT_FOUND", "Customer ID " + id + " is not found");
+        }
+    }
 }

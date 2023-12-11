@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -81,5 +81,15 @@ class DemoApplicationTests {
 
 
 		assertEquals("Koravit", customerInformationService.updateCustomerInformation(1, newCustomerEntity).getFirstNameEn());
+	}
+
+	@Test
+	public void deleteId1ShouldBeDeleted() {
+		when(customerInformationRepository.findById(1L))
+				.thenReturn(Optional.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com")));
+
+		customerInformationService.deleteCustomerInformationById(1L);
+
+		verify(customerInformationRepository, times(1)).deleteById(1L);
 	}
 }
