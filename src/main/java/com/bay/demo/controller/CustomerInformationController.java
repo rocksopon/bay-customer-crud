@@ -23,32 +23,4 @@ public class CustomerInformationController {
     public List<CustomerInformation> getAllCustomerInformation() {
         return customerInformationService.getAllCustomerInformation();
     }
-
-    @GetMapping("/customers/{id}")
-    @PreAuthorize("hasRole('MAKER')")
-    @ApiOperation(value = "Get customers information by ID")
-    public CustomerInformation getCustomerInformationById(@PathVariable(required = true) long id) {
-        return customerInformationService.getCustomerInformationById(id);
-    }
-
-    @PostMapping("/customers")
-    @PreAuthorize("hasRole('MAKER')")
-    @ApiOperation(value = "Save new customers information")
-    public CustomerInformation saveCustomerInformation(@Valid @RequestBody CustomerInformation customerInformation) {
-        return customerInformationService.saveCustomerInformation(customerInformation);
-    }
-
-    @PutMapping("/customers/{id}")
-    @PreAuthorize("hasRole('MAKER')")
-    @ApiOperation(value = "Update customers information by ID")
-    public CustomerInformation updateCustomerInformation(@PathVariable(required = true) long id, @RequestBody CustomerInformation customerInformation) {
-        return customerInformationService.updateCustomerInformation(id, customerInformation);
-    }
-
-    @DeleteMapping("/customers/{id}")
-    @PreAuthorize("hasRole('MAKER')")
-    @ApiOperation(value = "Delete customers information by ID")
-    public void deleteCustomerInformationById(@PathVariable(required = true) long id) {
-        customerInformationService.deleteCustomerInformationById(id);
-    }
 }
