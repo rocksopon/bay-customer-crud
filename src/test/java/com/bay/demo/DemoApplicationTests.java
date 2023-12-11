@@ -22,9 +22,6 @@ class DemoApplicationTests {
 	private CustomerInformationService customerInformationService;
 
 	@Mock
-	private CustomerInformation customerInformation;
-
-	@Mock
 	private CustomerInformationRepository customerInformationRepository;
 
 	@Test
