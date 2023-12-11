@@ -43,4 +43,21 @@ class DemoApplicationTests {
 
 		assertEquals(1, customerInformationService.getCustomerInformationById(1).getCif());
 	}
+
+	@Test
+	public void saveCustomerByIdShouldReturnFirstNameSopon() {
+		CustomerInformation customerEntity = CustomerInformation.builder()
+				.titleEn("Mrs.")
+				.firstNameEn("Sopon")
+				.lastNameEn("Jamreankit")
+				.middleNameEn("")
+				.dateOfBirth(new Date())
+				.email("rocksopon@gmail.com")
+				.build();
+
+		when(customerInformationRepository.save(customerEntity))
+				.thenReturn(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com"));
+
+		assertEquals("Sopon", customerInformationService.saveCustomerInformation(customerEntity).getFirstNameEn());
+	}
 }

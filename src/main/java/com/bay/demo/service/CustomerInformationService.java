@@ -25,4 +25,8 @@ public class CustomerInformationService {
         return customerData.orElseThrow(() -> new NotFoundException("CUSTOMER_ID_NOT_FOUND", "Customer ID " + id + " is not found"));
     }
 
+    public CustomerInformation saveCustomerInformation(CustomerInformation entity) {
+        return customerInformationRepository.save(entity);
+    }
+
 }
