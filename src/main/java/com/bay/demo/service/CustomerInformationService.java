@@ -29,4 +29,20 @@ public class CustomerInformationService {
         return customerInformationRepository.save(entity);
     }
 
+    public CustomerInformation updateCustomerInformation(long id, CustomerInformation request) {
+        var customerData = customerInformationRepository.findById(id);
+        if (customerData.isPresent()) {
+            CustomerInformation customerInformation = customerData.get();
+            customerInformation.setEmail(request.getEmail());
+            customerInformation.setNationality(request.getNationality());
+            customerInformation.setTitleEn(request.getTitleEn());
+            customerInformation.setFirstNameEn(request.getFirstNameEn());
+            customerInformation.setLastNameEn(request.getLastNameEn());
+            customerInformation.setMiddleNameEn(request.getMiddleNameEn());
+            customerInformation.setDateOfBirth(request.getDateOfBirth());
+            return customerInformationRepository.save(customerInformation);
+        } else {
+            throw new NotFoundException("CUSTOMER_ID_NOT_FOUND", "Customer ID " + id + " is not found");
+        }
+    }
 }

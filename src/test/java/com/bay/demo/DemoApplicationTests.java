@@ -60,4 +60,26 @@ class DemoApplicationTests {
 
 		assertEquals("Sopon", customerInformationService.saveCustomerInformation(customerEntity).getFirstNameEn());
 	}
+
+	@Test
+	public void updateFirstNameFromSoponToKoravitShouldBeKoravit() {
+		CustomerInformation newCustomerEntity = CustomerInformation.builder()
+				.cif(1)
+				.titleEn("Mrs.")
+				.firstNameEn("Koravit")
+				.lastNameEn("Sitti")
+				.middleNameEn("")
+				.dateOfBirth(new Date())
+				.email("koravit.s@gmail.com")
+				.build();
+
+		when(customerInformationRepository.findById(1L))
+				.thenReturn(Optional.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com")));
+
+		when(customerInformationRepository.save(newCustomerEntity))
+				.thenReturn(newCustomerEntity);
+
+
+		assertEquals("Koravit", customerInformationService.updateCustomerInformation(1, newCustomerEntity).getFirstNameEn());
+	}
 }
