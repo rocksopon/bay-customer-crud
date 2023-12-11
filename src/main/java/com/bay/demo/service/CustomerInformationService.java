@@ -12,11 +12,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CustomerInformationService {
+
     @Autowired
     private CustomerInformationRepository customerInformationRepository;
 
     public List<CustomerInformation> getAllCustomerInformation() {
         return customerInformationRepository.findAll();
+    }
+
+    public CustomerInformation getCustomerInformationById(long id) {
+        var customerData = customerInformationRepository.findById(id);
+        return customerData.orElseThrow(() -> new NotFoundException("CUSTOMER_ID_NOT_FOUND", "Customer ID " + id + " is not found"));
     }
 
 }

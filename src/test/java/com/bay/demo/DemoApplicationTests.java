@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -33,5 +34,13 @@ class DemoApplicationTests {
 						new CustomerInformation(2, "Mrs.", "Koravit", "Sitti", "", new Date(), "THA", "koravit.s@gmail.com")));
 
 		assertEquals(2, customerInformationService.getAllCustomerInformation().size());
+	}
+
+	@Test
+	public void getAllCustomerByIdShouldReturnId1() {
+		when(customerInformationRepository.findById(1L))
+				.thenReturn(Optional.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com")));
+
+		assertEquals(1, customerInformationService.getCustomerInformationById(1).getCif());
 	}
 }
