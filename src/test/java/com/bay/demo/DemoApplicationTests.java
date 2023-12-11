@@ -8,6 +8,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
 class DemoApplicationTests {
 
@@ -20,4 +26,12 @@ class DemoApplicationTests {
 	@Mock
 	private CustomerInformationRepository customerInformationRepository;
 
+	@Test
+	public void getAllCustomersShouldReturn1Size() {
+		when(customerInformationRepository.findAll())
+				.thenReturn(List.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com"),
+						new CustomerInformation(2, "Mrs.", "Koravit", "Sitti", "", new Date(), "THA", "koravit.s@gmail.com")));
+
+		assertEquals(2, customerInformationService.getAllCustomerInformation().size());
+	}
 }
