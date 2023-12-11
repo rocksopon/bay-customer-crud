@@ -19,6 +19,7 @@ Customer Model in In-Memory Database
 - Create directory that you wanna keep the project
 - Open Terminal/cmd
 > git init
+
 > git pull git@github.com:rocksopon/bay-customer-crud.git
 - Import Bay Customer CRUD project into your IDE
 - Open termianal in your IDE
