@@ -5,6 +5,8 @@ import com.bay.demo.service.CustomerInformationService;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +36,9 @@ public class CustomerInformationController {
     @PostMapping("/customers")
     @PreAuthorize("hasRole('MAKER')")
     @ApiOperation(value = "Save new customers information")
-    public CustomerInformation saveCustomerInformation(@Valid @RequestBody CustomerInformation customerInformation) {
-        return customerInformationService.saveCustomerInformation(customerInformation);
+    public ResponseEntity<CustomerInformation> saveCustomerInformation(@Valid @RequestBody CustomerInformation customerInformation) {
+        var saveCustomerInformation = customerInformationService.saveCustomerInformation(customerInformation);
+        return new ResponseEntity<>(saveCustomerInformation, HttpStatus.CREATED);
     }
 
     @PutMapping("/customers/{id}")
@@ -48,7 +51,8 @@ public class CustomerInformationController {
     @DeleteMapping("/customers/{id}")
     @PreAuthorize("hasRole('MAKER')")
     @ApiOperation(value = "Delete customers information by ID")
-    public void deleteCustomerInformationById(@PathVariable(required = true) long id) {
+    public ResponseEntity<HttpStatus> deleteCustomerInformationById(@PathVariable(required = true) long id) {
         customerInformationService.deleteCustomerInformationById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
