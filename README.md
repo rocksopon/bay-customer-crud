@@ -27,7 +27,10 @@ Customer Model in In-Memory Database
 
 ## Usage
 - Run the application to starting the microservices for Customer CRUD
-
+- JWT Token examples  with role **MAKER**
+> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU29wb24gSmFtcmVhbmtpdCIsImJyYW5jaCI6IjIwMDAwMCIsInJvbGUiOiJNQUtFUiJ9.tctPZ4Zs0Y4t_aa0xT1ARBT9CQgE_EZp8Dac0TdxAdc
+-  JWT Token examples  with role **CHECKER**
+> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU29wb24gSmFtcmVhbmtpdCIsImJyYW5jaCI6IjIwMDAwMCIsInJvbGUiOiJDSEVDS0VSIn0.a2mv5iAXY1O1UN89tdEL0HcMhXf9p6q69zYynwzPlfk
 ## Features
 - BAY Customer CRUD
 
