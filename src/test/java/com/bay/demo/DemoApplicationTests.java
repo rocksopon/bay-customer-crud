@@ -1,5 +1,6 @@
 package com.bay.demo;
 
+import com.bay.demo.core.exception.NotFoundException;
 import com.bay.demo.repository.CustomerInformation;
 import com.bay.demo.repository.CustomerInformationRepository;
 import com.bay.demo.service.CustomerInformationService;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -80,6 +82,26 @@ class DemoApplicationTests {
 		assertEquals("Koravit", customerInformationService.updateCustomerInformation(1, newCustomerEntity).getFirstNameEn());
 	}
 
+	@Test()
+	void updateIdThatNotExistShouldBeThrowNotFoundException() {
+		CustomerInformation updateCustomerEntity = CustomerInformation.builder()
+				.cif(1)
+				.titleEn("Mrs.")
+				.firstNameEn("Koravit")
+				.lastNameEn("Sitti")
+				.middleNameEn("")
+				.dateOfBirth(new Date())
+				.email("koravit.s@gmail.com")
+				.build();
+
+		when(customerInformationRepository.findById(1L))
+				.thenReturn(Optional.empty());
+
+		NotFoundException notFoundException = assertThrows(NotFoundException.class,() -> customerInformationService.updateCustomerInformation(1L, updateCustomerEntity));
+
+		assertEquals("CUSTOMER_ID_NOT_FOUND", notFoundException.getCode());
+	}
+
 	@Test
 	void deleteId1ShouldBeDeleted() {
 		when(customerInformationRepository.findById(1L))
@@ -88,5 +110,15 @@ class DemoApplicationTests {
 		customerInformationService.deleteCustomerInformationById(1L);
 
 		verify(customerInformationRepository, times(1)).deleteById(1L);
+	}
+
+	@Test
+	void deleteIdThatNotExistShouldBeThrowNotFoundException() {
+		when(customerInformationRepository.findById(1L))
+				.thenReturn(Optional.empty());
+
+		NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> customerInformationService.deleteCustomerInformationById(1L));
+
+		assertEquals("CUSTOMER_ID_NOT_FOUND", notFoundException.getCode());
 	}
 }
