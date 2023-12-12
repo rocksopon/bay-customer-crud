@@ -25,7 +25,7 @@ class DemoApplicationTests {
 	private CustomerInformationRepository customerInformationRepository;
 
 	@Test
-	public void getAllCustomersShouldReturn1Size() {
+	void getAllCustomersShouldReturn2Size() {
 		when(customerInformationRepository.findAll())
 				.thenReturn(List.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com"),
 						new CustomerInformation(2, "Mrs.", "Koravit", "Sitti", "", new Date(), "THA", "koravit.s@gmail.com")));
@@ -34,7 +34,7 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	public void getAllCustomerByIdShouldReturnId1() {
+	void getAllCustomerByIdShouldReturnId1() {
 		when(customerInformationRepository.findById(1L))
 				.thenReturn(Optional.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com")));
 
@@ -42,7 +42,7 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	public void saveCustomerByIdShouldReturnFirstNameSopon() {
+	void saveCustomerByIdShouldReturnFirstNameSopon() {
 		CustomerInformation customerEntity = CustomerInformation.builder()
 				.titleEn("Mrs.")
 				.firstNameEn("Sopon")
@@ -59,7 +59,7 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	public void updateFirstNameFromSoponToKoravitShouldBeKoravit() {
+	void updateFirstNameFromSoponToKoravitShouldBeKoravit() {
 		CustomerInformation newCustomerEntity = CustomerInformation.builder()
 				.cif(1)
 				.titleEn("Mrs.")
@@ -81,7 +81,7 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	public void deleteId1ShouldBeDeleted() {
+	void deleteId1ShouldBeDeleted() {
 		when(customerInformationRepository.findById(1L))
 				.thenReturn(Optional.of(new CustomerInformation(1, "Mrs.", "Sopon", "Jamreankit", "", new Date(), "THA", "rocksopon@gmail.com")));
 
